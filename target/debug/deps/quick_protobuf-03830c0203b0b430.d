@@ -1,0 +1,10 @@
+/Users/smehta/Desktop/Dev/kraken/Blockchain/target/debug/deps/libquick_protobuf-03830c0203b0b430.rmeta: /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/lib.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/errors.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/message.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/reader.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/sizeofs.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/writer.rs
+
+/Users/smehta/Desktop/Dev/kraken/Blockchain/target/debug/deps/quick_protobuf-03830c0203b0b430.d: /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/lib.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/errors.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/message.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/reader.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/sizeofs.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/writer.rs
+
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/lib.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/errors.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/message.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/reader.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/sizeofs.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quick-protobuf-0.8.1/src/writer.rs:

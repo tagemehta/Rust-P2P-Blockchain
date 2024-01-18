@@ -1,0 +1,1 @@
+{"type":"resolve","resolvedModuleId":"rust-stable:v3-20231201-3b22c78","inputHash":"","resolutionPath":["rust-1.69:v2-20230623-0b7a606","rust-1.70:v1-20230724-17660e5","rust-1.72:v1-20230911-f253fb1","rust-stable:v1-20231012-19c270f","rust-stable:v2-20231103-2b03dda","rust-stable:v3-20231201-3b22c78"],"error":"","Changed":true}

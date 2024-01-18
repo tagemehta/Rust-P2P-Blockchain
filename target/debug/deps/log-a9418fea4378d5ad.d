@@ -1,0 +1,13 @@
+/Users/smehta/Desktop/Dev/kraken/Blockchain/target/debug/deps/liblog-a9418fea4378d5ad.rmeta: /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/lib.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/macros.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/serde.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/mod.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/error.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/key.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/source.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/value.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/__private_api.rs
+
+/Users/smehta/Desktop/Dev/kraken/Blockchain/target/debug/deps/log-a9418fea4378d5ad.d: /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/lib.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/macros.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/serde.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/mod.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/error.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/key.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/source.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/value.rs /Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/__private_api.rs
+
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/lib.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/macros.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/serde.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/mod.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/error.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/key.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/source.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/kv/value.rs:
+/Users/smehta/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.20/src/__private_api.rs:

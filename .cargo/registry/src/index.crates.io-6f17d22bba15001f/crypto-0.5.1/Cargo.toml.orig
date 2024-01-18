@@ -1,0 +1,42 @@
+[package]
+name = "crypto"
+version = "0.5.1"
+description = "Facade crate for all of the RustCrypto traits (e.g. `aead`, `cipher`, `digest`)"
+authors = ["The RustCrypto Project Developers"]
+license = "Apache-2.0 OR MIT"
+documentation = "https://docs.rs/crypto"
+repository = "https://github.com/RustCrypto/traits"
+keywords = ["crypto", "encryption", "rustcrypto"]
+categories = ["cryptography", "no-std"]
+readme = "README.md"
+edition = "2021"
+rust-version = "1.65"
+
+[dependencies]
+crypto-common = { version = "0.1", default-features = false }
+
+# optional dependencies
+aead = { version = "0.5", optional = true, path = "../aead" }
+cipher = { version = "0.4", optional = true }
+digest = { version = "0.10", optional = true, features = ["mac"] }
+elliptic-curve = { version = "0.13", optional = true, path = "../elliptic-curve" }
+password-hash = { version = "0.5", optional = true, path = "../password-hash" }
+signature = { version = "2", optional = true, default-features = false, path = "../signature" }
+universal-hash = { version = "0.5", optional = true, path = "../universal-hash" }
+
+[features]
+std = [
+    "aead/std",
+    "cipher/std",
+    "digest/std",
+    "elliptic-curve/std",
+    "password-hash/std",
+    "signature/std",
+    "universal-hash/std"
+]
+getrandom = ["crypto-common/getrandom"]
+rand_core = ["crypto-common/rand_core"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

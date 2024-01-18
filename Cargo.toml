@@ -1,0 +1,18 @@
+[package]
+name = "my-project"
+version = "0.1.0"
+authors = ["runner"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures = "0.3.30"
+libp2p = {version = "0.53.2", features = [ "tokio", "gossipsub", "mdns", "noise", "macros", "tcp", "yamux", "quic"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha256 = "1.0"
+tokio = { version = "1", features = ["full"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+regex = "1.10.2"
+tracing = "0.1.40"
