@@ -5,19 +5,18 @@ use sha256::digest;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Transaction {
-    pub input: Vec<String>, //input utxo.hash
-    pub output: String, //output utxo.hash
-    pub amount: u64,
-    pub hash: Option<String>
+    pub input: Vec<String>, // Vector of utxo hashes to consume
+    pub output: Vec<(String, u64)>, // Vector (receiver address, amount)
+    pub txid: Option<String> //
 }
 
 impl Transaction {
-    pub fn new(input: Vec<String>, output: String, amount: u64) -> Self {
-      Transaction { input: input.clone(), output: output.clone(), amount, hash: Some(Transaction::hash(input, output, amount)) }
+    pub fn new(input: Vec<String>, output: Vec<(String, u64)>) -> Self {
+      Transaction { input: input.clone(), output: output.clone(), txid: Some(Transaction::hash(input, output)) }
     }
 
-    fn hash (input: Vec<String>, output: String, amount: u64) -> String {
-        let json = json_string(&(Transaction { input, output, amount, hash: None }));
+    fn hash (input: Vec<String>, output: Vec<(String, u64)>) -> String {
+        let json = json_string(&(Transaction { input, output, txid: None }));
         digest(json.unwrap())
     }
 }

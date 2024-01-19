@@ -5,19 +5,20 @@ use sha256::digest;
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Utxo {
-  pub input: Vec<String>, //old utxos to be spent
   pub output: String, //receiver address, design decision to only include one output
   pub amount: u64,
-  pub hash: Option<String>
+  pub hash: Option<String>,
+  pub txid: String, //hash of the transaction being spent
+  pub index: u32 // index in the transaction array
 }
 
 impl Utxo {
-  pub fn new(input: Vec<String>, output: String, amount: u64) -> Self {
-    Utxo { input: input.clone(), output: output.clone(), amount, hash: Some(Utxo::hash(input, output, amount)) }
+  pub fn new(output: String, amount: u64, txid: String, index: u32) -> Self {
+    Utxo { output: output.clone(), amount, txid: txid.clone(), hash: Some(Utxo::hash(output, amount, txid, index)), index }
   }
 
-  fn hash (input: Vec<String>, output: String, amount: u64) -> String {
-    let json = json_string(&(Utxo { input, output, amount, hash: None }));
+  fn hash (output: String, amount: u64, txid: String, index: u32) -> String {
+    let json = json_string(&(Utxo { output, amount, hash: None, txid, index }));
     digest(json.unwrap())
   }
 }

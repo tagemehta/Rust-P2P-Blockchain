@@ -6,12 +6,12 @@ pub mod utxo;
 
 use crate::node::{Node, MyBehaviour, MyBehaviourEvent};
 use futures::stream::StreamExt;
-use libp2p::{gossipsub, mdns, noise, swarm::NetworkBehaviour, swarm::SwarmEvent, tcp, yamux};
+use libp2p::{gossipsub, mdns, noise, swarm::SwarmEvent, tcp, yamux};
 use std::collections::hash_map::DefaultHasher;
 use std::error::Error;
 use std::hash::{Hash, Hasher};
 use std::time::Duration;
-use tokio::{io, io::AsyncBufReadExt, select};
+use tokio::{io, io::AsyncBufReadExt, select, time};
 use tracing_subscriber::EnvFilter;
 
 
@@ -86,6 +86,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
   swarm.listen_on("/ip4/0.0.0.0/udp/0/quic-v1".parse()?)?;
   swarm.listen_on("/ip4/0.0.0.0/tcp/0".parse()?)?;
   let mut chain_node = Node::new();
+
+  let mut tasks = false;
   println!("Enter messages via STDIN and they will be sent to connected peers using Gossipsub");
   // Kick it off
   loop {
@@ -103,6 +105,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
                       swarm.behaviour_mut().gossipsub.add_explicit_peer(&peer_id);
 
                   }
+                  tasks = true;
+                  let mut interval = time::interval(time::Duration::from_secs(5));
+                  interval.tick().await;
+                  interval.tick().await;
+                  chain_node.send_chain(&topic_tx, &mut swarm);
               },
               SwarmEvent::Behaviour(MyBehaviourEvent::Mdns(mdns::Event::Expired(list))) => {
                   for (peer_id, _multiaddr) in list {
@@ -111,17 +118,17 @@ async fn main() -> Result<(), Box<dyn Error>> {
                   }
               },
               SwarmEvent::Behaviour(MyBehaviourEvent::Gossipsub(gossipsub::Event::Message {
-                  propagation_source: peer_id,
-                  message_id: id,
+                  propagation_source: _peer_id,
+                  message_id: _id,
                   message,
               })) => {
+
                 let msg = String::from_utf8_lossy(&message.data);
                 chain_node.receive_message(msg.to_string());
-                
-                println!(
-                      "Got message: '{}' with id: {id} from peer: {peer_id}",
-                      String::from_utf8_lossy(&message.data),
-                  )
+                // println!(
+                //       "Got message: '{}' with id: {id} from peer: {peer_id}",
+                //       String::from_utf8_lossy(&message.data),
+                //   )
                 },
               SwarmEvent::NewListenAddr { address, .. } => {
                   println!("Local node is listening on {address}");
@@ -129,10 +136,17 @@ async fn main() -> Result<(), Box<dyn Error>> {
               _ => {}
           },
 
-          b = async {chain_node.num_pending_tx() >= 2} => {
-            if b {
+          b = async { &mut tasks } => {
+            if chain_node.num_pending_tx() >= 5 {
               chain_node.mine(&topic_tx, &mut swarm);
             }
+            if *b {
+              if chain_node.send_chain(&topic_tx, &mut swarm) {
+                *b = false;
+                println!("Blockchain sent to peer");
+              }
+            }
+            
           }
       }
   }

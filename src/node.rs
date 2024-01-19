@@ -57,34 +57,46 @@ impl Node{
   }
 
   pub fn rec_input(&mut self, msg: String, topic_tx: &IdentTopic, swarm: &mut Swarm<MyBehaviour>,) {
-    if msg.eq("start") {
-      if let Err(e) = swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Blockchain: ".to_string() + &to_string(&self.chain).unwrap() ).as_bytes()) {
-        println!("Publish error: {e:?}");  
+
+      if msg.eq("send_chain") {
+        self.send_chain(topic_tx, swarm);
       }
-    }
-    else {
-      match parse_send_input(&msg) {
-        Some((amt, send, rec)) => {
-          match self.chain.send_to(send, rec, amt) {
-            Some(tx) => {
-              if let Err(e) = swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Transaction: ".to_string() + &to_string(&tx).unwrap() ).as_bytes()) {
-                println!("Publish error: {e:?}");  
-              }
-            },
-            None => println!("Invalid transaction")
+      else if msg.eq("wallets") {
+        println!("{}", self.chain);
+      }
+      else  {
+        match parse_send_input(&msg) {
+          Some((amt, send, rec)) => {
+            match self.chain.send_to(send, rec, amt) {
+              Some(tx) => {
+                if swarm.connected_peers().count() > 0 {
+                  if let Err(e) = swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Transaction: ".to_string() + &to_string(&tx).unwrap() ).as_bytes()) {
+                    println!("Publish error: {e:?}");  
+                  }
+                }
+              },
+              None => println!("Invalid transaction")
+              
+            }
             
+        },
+          None => {
+            println!("Invalid input format");
           }
-          
-      },
-        None => {
-          println!("Invalid input format");
-        }
+      }
+      println!("{}", &self.chain);
     }
+
+  
   }
-  }
-  pub fn mine(&mut self, topic_tx: &IdentTopic, swarm: &mut Swarm<MyBehaviour>,) {
-    if let Err(e) = swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Block: ".to_string() + &to_string(&self.chain.mine()).unwrap() ).as_bytes()) {
-      println!("Publish error: {e:?}");  
+  pub fn mine(&mut self, topic_tx: &IdentTopic, swarm: &mut Swarm<MyBehaviour>) {
+    let block = self.chain.mine();
+    println!("Mined Block:\n{:#?}", &block);
+    if swarm.connected_peers().count() > 0 {
+      match swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Block: ".to_string() + &to_string(&block).unwrap() ).as_bytes()) {
+        Err(e) => println!("Error sending mined block to peer: {:?}", e),
+        Ok(_b) => println!("Mined block sent: {:?}", block)
+      }
     }
   }
 
@@ -92,9 +104,17 @@ impl Node{
     self.chain.num_pending_tx()
   }
 
-  pub fn send_chain(&self) -> String {
-    to_string(&self.chain).unwrap() //unwrapping because it's a valid struct
+  pub fn send_chain(&self, topic_tx: &IdentTopic, swarm: &mut Swarm<MyBehaviour>) -> bool {
+    
+      if let Err(_e) = swarm.behaviour_mut().gossipsub.publish(topic_tx.clone(), ("Blockchain: ".to_string() + &to_string(&self.chain).unwrap() ).as_bytes()) {
+        false
+      }
+      else {
+        true
+      }
   }
+
+
 
   // pub fn reconcile_chain(&mut self, msg: String) {
   //   if msg.starts_with("Blockchain: ") {

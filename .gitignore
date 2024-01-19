@@ -1,4 +1,5 @@
-./target
-./.cache
-./.cargo
-./.upm
+target/
+.cache/
+.cargo/
+.upm/
+.cargo.lock/
